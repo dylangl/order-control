@@ -42,9 +42,16 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        return parent::render($request, $exception);
+//        return parent::render($request, $exception);
+        if ($e instanceof ParamException) {
+            return response(['code' => $e->getCode(), 'msg' => $e->getMessage()]);
+        }
+        if ($e instanceof DatabaseException) {
+            return response(['code' => $e->getCode(), 'msg' => $e->getMessage()]);
+        }
+        return parent::render($request, $e);
     }
 
     /**

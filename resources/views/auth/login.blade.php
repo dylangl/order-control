@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head lang="zh">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>登录 - {{ config('app.name') }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!--<script src="{$Think.DS}assets/js/amazeui.min.js"></script>-->
     <meta name="renderer" content="webkit">
     <script type="text/javascript" src="{{ asset('static/js/vue.js') }}"></script>
     <script type="text/javascript" src="{{ asset('static/js/axios.min.js') }}"></script>
@@ -21,7 +20,7 @@
 </head>
 <body>
 <div id="app">
-    <h1>{:config('WEB_SITE_TITLE')}
+    <h1>{{ config('app.name') }}
         <small> 登录</small>
     </h1>
 
@@ -135,8 +134,8 @@
         el: '#app',
         data: {
             login: {
-                name: '',
-                password: ''
+                name: 'admin',
+                password: 'admin123456'
             },
             reg: {
                 name: 'admin',
