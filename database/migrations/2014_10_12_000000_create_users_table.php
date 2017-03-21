@@ -24,8 +24,6 @@ class CreateUsersTable extends Migration
             $table->unsignedTinyInteger('status')->comment('状态');
             $table->string('reg_ip')->comment('注册IP');
             $table->unsignedTinyInteger('is_deleted')->comment('是否删除');
-            $table->integer('create_time')->comment('创建时间');
-            $table->integer('update_time')->comment('更新时间');
             $table->integer('last_time')->comment('上次登录时间');
             $table->string('last_ip')->comment('上次登录IP');
 
