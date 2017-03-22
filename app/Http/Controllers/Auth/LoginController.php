@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -45,7 +44,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $this->validate(self::rules(), $request->all());
+        $this->validate();
         if (Auth::attempt(['name' => $request->name, 'password' => $request->password])) {
             $status = Auth::user()->status;
             if ($status == Common::ACCOUNT_STATUS_AUDITING) {

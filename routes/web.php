@@ -11,14 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//})->middleware('auth');
 
 Auth::routes();
 
-Route::get('/logout',function(){
+Route::get('/logout', function () {
     Auth::logout();
 });
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/','Index\IndexController@run');
+
+    Route::get('user/profile', function () {
+        // 使用 `Auth` 中间件
+    });
+});

@@ -27,8 +27,10 @@ class Controller extends BaseController
     }
 
     //参数验证
-    public function validate($paramRules,$data)
+    public function validate()
     {
+        $calledClass = get_called_class();
+        $paramRules = $calledClass::rules();
         foreach ($paramRules as $title => $value) {
             //构建验证规则数组
             $rule[$title] = $value[0];
@@ -36,7 +38,7 @@ class Controller extends BaseController
             $attributeName[$title] = $value[1];
         }
 
-        $validation=\Validator::make($data, $rule)->setAttributeNames($attributeName);
+        $validation = \Validator::make(app()->request->all(), $rule)->setAttributeNames($attributeName);
         if ($validation->fails()) {
             throw new ParamException($validation->messages()->first(), RetCode::ERR_PARAM);
         }
