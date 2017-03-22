@@ -9,6 +9,6 @@ class IndexController extends Controller
 {
     public function run()
     {
-        return view('index');
+        return view('index', ['menus' => 1]);
     }
 }
