@@ -69,7 +69,7 @@ class Controller extends BaseController
             ->where('is_deleted', Common::FALSE)
             ->where('status', Common::TRUE)
             ->orderBy('sort', 'asc')
-            ->get()->toArray();
+            ->get();
 
         return $menus;
 //        dump($menus);
