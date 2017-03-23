@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Common\Define\Common;
 use App\Common\Define\RetCode;
 use App\Exceptions\ParamException;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Controller extends BaseController
 {
@@ -42,6 +45,34 @@ class Controller extends BaseController
         if ($validation->fails()) {
             throw new ParamException($validation->messages()->first(), RetCode::ERR_PARAM);
         }
+    }
+
+    //获取菜单
+    public function getMenu()
+    {
+        $groupId = Auth::user()->group_id;
+        $data = DB::table('group')
+            ->where('id', $groupId)
+            ->where('is_deleted', Common::FALSE)
+            ->first();
+
+        if (empty($data)) {
+            return [];
+        }
+
+        $rules = $data->rules;
+        $rules = json_decode($rules, true);
+
+        $menus = DB::table('rule')
+            ->select('title', 'url', 'icon')
+            ->whereIn('id', $rules)
+            ->where('is_deleted', Common::FALSE)
+            ->where('status', Common::TRUE)
+            ->orderBy('sort', 'asc')
+            ->get()->toArray();
+
+        return $menus;
+//        dump($menus);
     }
 
 }

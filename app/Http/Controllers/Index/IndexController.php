@@ -9,6 +9,6 @@ class IndexController extends Controller
 {
     public function run()
     {
-        return view('index', ['menus' => 1]);
+        return view('index', ['menus' => $this->getMenu()]);
     }
 }
