@@ -34,7 +34,7 @@ class User extends Authenticatable
         if (!empty($name)) {
             $condition = $condition->whereLike('username', '%' . $name . '%');
         }
-        $list = $condition->paginate(15);
+        $list = $condition->paginate(2);
 
         return $list;
     }
