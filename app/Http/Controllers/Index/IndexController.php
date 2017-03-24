@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Index;
 
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Route;
 
 
 class IndexController extends Controller

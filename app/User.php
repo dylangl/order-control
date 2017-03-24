@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Common\Define\Common;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,4 +27,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getList($name = null, $page = 1)
+    {
+        $condition = self::where('is_deleted', Common::FALSE);
+        if (!empty($name)) {
+            $condition = $condition->whereLike('username', '%' . $name . '%');
+        }
+        $list = $condition->paginate(15);
+
+        return $list;
+    }
 }
