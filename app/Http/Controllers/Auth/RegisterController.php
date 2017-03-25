@@ -75,7 +75,7 @@ class RegisterController extends Controller
             'reg_ip' => request()->ip(),
             'is_deleted' => 0,
             'last_time' => time(),
-            'last_ip' => time(),
+            'last_ip' => '',
         ]);
     }
 }
