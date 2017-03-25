@@ -34,8 +34,15 @@ class User extends Authenticatable
         if (!empty($name)) {
             $condition = $condition->whereLike('username', '%' . $name . '%');
         }
-        $list = $condition->paginate(2);
+        $list = $condition->paginate(10);
 
         return $list;
+    }
+
+    //审核用户
+    public function verify($userIds, $status)
+    {
+        self::whereIn('id', $userIds)
+            ->update(['status' => $status]);
     }
 }
