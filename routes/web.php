@@ -32,6 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'Manage', 'prefix' => 'manage'], function () {
         Route::get('/user', 'UserListController@run');
         Route::get('/user/verify', 'UserVerifyController@run');
+        Route::get('/product', 'ProductController@run');
+        Route::post('/product/add', 'ProductAddController@run');
     });
 
     Route::get('user/profile', function () {
