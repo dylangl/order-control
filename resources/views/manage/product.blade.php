@@ -72,8 +72,11 @@
                                         <td>{{ $user->price }}</td>
                                         <td class="am-hide-sm-only">{{ $user->unit }}</td>
                                         <td class="am-hide-sm-only">{{ $user->classify_id }}</td>
-                                        <td>{{ \Illuminate\Support\Facades\Storage::url($user->pic) }}</td>
-                                        <td>{{ $user->status }}</td>
+                                        <td><img class="am-radius"
+                                                 src="{{ \Illuminate\Support\Facades\Storage::url($user->pic) }}"
+                                                 width="100" height="100"/>
+                                        </td>
+                                        <td>{{ getTrueFalseName($user->is_show) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

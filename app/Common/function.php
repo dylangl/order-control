@@ -10,8 +10,9 @@ function getGroupName($groupId)
     return \Illuminate\Support\Facades\DB::table('group')->where('id', $groupId)->value('title');
 }
 
-function getUserStatus($status){
-    switch ($status){
+function getUserStatus($status)
+{
+    switch ($status) {
         case '0':
             return '未审核';
             break;
@@ -25,6 +26,11 @@ function getUserStatus($status){
             return '未知';
             break;
     }
+}
+
+function getTrueFalseName($type)
+{
+    return $type == true ? '是' : '否';
 }
 
 //获取订单状态
